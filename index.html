@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poo Cafe</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="logo-emoji">☕️</span>
+            </div>
+            <h1>Poo Cafe</h1>
+            <p class="subtitle">Make your day better!</p>
+        </header>
+
+        <div class="menu-container">
+            <section class="menu-section">
+                <h2><i class="ri-cup-fill"></i> 含奶</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <span class="tag">Dirty</span>
+                        <span class="name">椰椰dirty(冰)</span>
+                        <span class="price">¥12</span>
+                        <button onclick="addToOrder('椰椰dirty(冰)', 12)">+</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="tag">Dirty</span>
+                        <span class="name">dirty(冰)</span>
+                        <span class="price">¥5</span>
+                        <button onclick="addToOrder('dirty(冰)', 5)">+</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="tag">拿铁</span>
+                        <span class="name">拿铁(冰)</span>
+                        <span class="price">¥5</span>
+                        <button onclick="addToOrder('拿铁(冰)', 5)">+</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="tag">拿铁</span>
+                        <span class="name">拿铁(热)</span>
+                        <span class="price">¥5</span>
+                        <button onclick="addToOrder('拿铁(热)', 5)">+</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="tag">拿铁</span>
+                        <span class="name">抹茶拿铁(热)</span>
+                        <span class="price">¥5</span>
+                        <button onclick="addToOrder('抹茶拿铁(热)', 5)">+</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="menu-section">
+                <h2><i class="ri-water-flash-line"></i> 不含奶</h2>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <span class="tag">美式</span>
+                        <span class="name">椰青美式(冷)</span>
+                        <span class="price">¥5</span>
+                        <button onclick="addToOrder('椰青美式(冷)', 5)">+</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="tag">美式</span>
+                        <span class="name">青柠美式(冷)</span>
+                        <span class="price">¥5</span>
+                        <button onclick="addToOrder('青柠美式(冷)', 5)">+</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="tag">美式</span>
+                        <span class="name">美式(冷)</span>
+                        <span class="price">¥5</span>
+                        <button onclick="addToOrder('美式(冷)', 5)">+</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="tag">美式</span>
+                        <span class="name">美式(热)</span>
+                        <span class="price">¥5</span>
+                        <button onclick="addToOrder('美式(热)', 5)">+</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="tag">冰滴</span>
+                        <span class="name">冰滴(冷)</span>
+                        <span class="price">¥5</span>
+                        <button onclick="addToOrder('冰滴(冷)', 5)">+</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="tag">冷萃</span>
+                        <span class="name">冷萃(冷)</span>
+                        <span class="price">¥5</span>
+                        <button onclick="addToOrder('冷萃(冷)', 5)">+</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="tag">手冲</span>
+                        <span class="name">狗都不喝(热)</span>
+                        <span class="price">¥5</span>
+                        <button onclick="addToOrder('狗都不喝(热)', 5)">+</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="menu-section">
+                <h2><i class="ri-seed-line"></i> Beans</h2>
+                <div class="menu-items beans">
+                    <div class="menu-item">
+                        <span class="name">加满逸夏</span>
+                        <span class="price">+¥1</span>
+                        <button onclick="addBean('加满逸夏', 1)">选择</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="name">花魁soe</span>
+                        <span class="price">+¥1</span>
+                        <button onclick="addBean('花魁soe', 1)">选择</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="name">光拼配</span>
+                        <span class="price">+¥1</span>
+                        <button onclick="addBean('光拼配', 1)">选择</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="name">天堂</span>
+                        <span class="price">+¥1</span>
+                        <button onclick="addBean('天堂', 1)">选择</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="name">黄昏</span>
+                        <span class="price">+¥1</span>
+                        <button onclick="addBean('黄昏', 1)">选择</button>
+                    </div>
+                    <div class="menu-item">
+                        <span class="name">朱古力buff</span>
+                        <span class="price">+¥1</span>
+                        <button onclick="addBean('朱古力buff', 1)">选择</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="order-summary">
+            <h3><i class="ri-shopping-cart-2-line"></i> 订单明细</h3>
+            <div id="orderList"></div>
+            <div class="total">总计: ¥<span id="totalAmount">0</span></div>
+            <div class="order-form">
+                <input type="text" id="customerName" placeholder="请输入您的名字">
+                <button id="submitOrder" onclick="submitOrder()">
+                    <i class="ri-send-plane-fill"></i> 提交订单
+                </button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

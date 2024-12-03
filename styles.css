@@ -1,0 +1,257 @@
+:root {
+    --brand-color: #795548;
+    --brand-color-dark: #6d4c41;
+    --brand-bg: #faf7f2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--brand-bg);
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 30px 0;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.1);
+}
+
+header h1 {
+    font-size: 28px;
+    color: var(--brand-color);
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.subtitle {
+    color: #9e9e9e;
+    font-size: 14px;
+}
+
+.menu-section {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.2s;
+}
+
+.menu-section:hover {
+    transform: translateY(-2px);
+}
+
+.menu-section h2 {
+    margin-bottom: 20px;
+    color: #795548;
+    font-size: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.menu-section h2 i {
+    font-size: 24px;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    background: #fafafa;
+    transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+    background: #f5f5f5;
+}
+
+.tag {
+    background: #795548;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.name {
+    flex: 1;
+    font-size: 14px;
+}
+
+.price {
+    margin: 0 15px;
+    color: #795548;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+button {
+    background: #795548;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+button:hover {
+    background: #6d4c41;
+    transform: translateY(-1px);
+}
+
+.order-summary {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.order-summary h3 {
+    margin-bottom: 20px;
+    color: #795548;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#orderList {
+    margin-bottom: 20px;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 12px;
+    background: #fafafa;
+    margin-bottom: 8px;
+}
+
+.total {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+    text-align: right;
+    color: #795548;
+}
+
+.order-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#customerName {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #f0f0f0;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+#customerName:focus {
+    border-color: #795548;
+    outline: none;
+}
+
+#submitOrder {
+    width: 100%;
+    padding: 14px;
+    background: #795548;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    justify-content: center;
+}
+
+#submitOrder:hover {
+    background: #6d4c41;
+}
+
+/* 添加动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.menu-item, .order-item {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.logo-emoji {
+    font-size: 72px;
+    line-height: 1;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+#submitOrder i.ri-loader-2-line {
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#submitOrder:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+} 
