@@ -90,34 +90,40 @@ async function submitOrder() {
         submitButton.disabled = true;
         submitButton.innerHTML = '<i class="ri-loader-2-line"></i> Submitting...';
 
-        const orderDetails = {
-            customerName: customerName,
-            items: currentOrder,
-            bean: selectedBean,
-            total: document.getElementById('totalAmount').textContent,
-            note: prompt('Any special requests? (Optional)：') || 'None'
-        };
+        const note = prompt('Any special requests? (Optional)：') || 'None';
 
-        const response = await fetch(`${API_URL}/submit-order`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(orderDetails)
+        // 生成邮件内容
+        let emailContent = `
+新订单通知！
+
+顾客姓名: ${customerName}
+备注信息: ${note}
+
+订单明细:
+`;
+
+        currentOrder.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            emailContent += `\n${item.name} x ${item.quantity} - ¥${itemTotal}`;
         });
 
-        const result = await response.json();
-        
-        if (result.success) {
-            alert('Order submitted successfully!');
-            // 清空订单
-            currentOrder = [];
-            selectedBean = null;
-            document.getElementById('customerName').value = '';
-            updateOrderDisplay();
-        } else {
-            alert('Failed to submit order: ' + result.message);
+        if (selectedBean) {
+            emailContent += `\n咖啡豆: ${selectedBean.name} +¥${selectedBean.price}`;
         }
+
+        const total = document.getElementById('totalAmount').textContent;
+        emailContent += `\n\n总计: ¥${total}`;
+
+        // 使用 mailto 链接发送邮件
+        const mailtoLink = `mailto:443875039@qq.com?subject=Poo Cafe - 新订单 - ${customerName}&body=${encodeURIComponent(emailContent)}`;
+        window.location.href = mailtoLink;
+
+        // 清空订单
+        currentOrder = [];
+        selectedBean = null;
+        document.getElementById('customerName').value = '';
+        updateOrderDisplay();
+
     } catch (error) {
         alert('Error submitting order: ' + error.message);
         console.error('Error:', error);
