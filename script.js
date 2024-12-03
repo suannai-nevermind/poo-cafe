@@ -92,8 +92,8 @@ async function submitOrder() {
 
         const note = prompt('Any special requests? (Optional)：') || 'None';
 
-        // 生成邮件内容
-        let emailContent = `
+        // 生成订单内容
+        let orderContent = `
 新订单通知！
 
 顾客姓名: ${customerName}
@@ -104,25 +104,26 @@ async function submitOrder() {
 
         currentOrder.forEach(item => {
             const itemTotal = item.price * item.quantity;
-            emailContent += `\n${item.name} x ${item.quantity} - ¥${itemTotal}`;
+            orderContent += `\n${item.name} x ${item.quantity} - ¥${itemTotal}`;
         });
 
         if (selectedBean) {
-            emailContent += `\n咖啡豆: ${selectedBean.name} +¥${selectedBean.price}`;
+            orderContent += `\n咖啡豆: ${selectedBean.name} +¥${selectedBean.price}`;
         }
 
         const total = document.getElementById('totalAmount').textContent;
-        emailContent += `\n\n总计: ¥${total}`;
+        orderContent += `\n\n总计: ¥${total}`;
 
-        // 使用 mailto 链接发送邮件
-        const mailtoLink = `mailto:443875039@qq.com?subject=Poo Cafe - 新订单 - ${customerName}&body=${encodeURIComponent(emailContent)}`;
-        window.location.href = mailtoLink;
-
-        // 清空订单
-        currentOrder = [];
-        selectedBean = null;
-        document.getElementById('customerName').value = '';
-        updateOrderDisplay();
+        // 显示订单确认
+        if (confirm(`您的订单：\n${orderContent}\n\n确认提交订单吗？`)) {
+            alert('订单已提交！\n我们会尽快处理您的订单。');
+            
+            // 清空订单
+            currentOrder = [];
+            selectedBean = null;
+            document.getElementById('customerName').value = '';
+            updateOrderDisplay();
+        }
 
     } catch (error) {
         alert('Error submitting order: ' + error.message);
