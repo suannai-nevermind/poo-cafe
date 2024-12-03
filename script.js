@@ -77,41 +77,61 @@ async function submitOrder() {
         // 检查表单
         const customerName = document.getElementById('customerName').value;
         if (!customerName) {
-            alert('Please leave your name');
+            alert('请留下您的名字');
             return;
         }
         
         if (currentOrder.length === 0) {
-            alert('Please select at least one item');
+            alert('请选择至少一件商品');
             return;
         }
 
         // 显示加载状态
         submitButton.disabled = true;
-        submitButton.innerHTML = '<i class="ri-loader-2-line"></i> Submitting...';
+        submitButton.innerHTML = '<i class="ri-loader-2-line"></i> 提交中...';
 
-        const orderDetails = {
-            customerName: customerName,
-            items: currentOrder,
-            bean: selectedBean,
-            total: document.getElementById('totalAmount').textContent,
-            note: prompt('Any special requests? (Optional)：') || 'None'
-        };
+        const note = prompt('备注（可选）：') || '无';
+
+        // 生成格式化的订单内容
+        let orderContent = `
+订单详情
+————————————————
+顾客姓名：${customerName}
+下单时间：${new Date().toLocaleString('zh-CN')}
+————————————————
+商品明细：`;
+
+        let subtotal = 0;
+        currentOrder.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+            orderContent += `\n· ${item.name} × ${item.quantity}  ¥${itemTotal}`;
+        });
+
+        if (selectedBean) {
+            subtotal += selectedBean.price;
+            orderContent += `\n· 咖啡豆：${selectedBean.name}  +¥${selectedBean.price}`;
+        }
+
+        orderContent += `\n————————————————
+总计：¥${subtotal}
+备注：${note}
+————————————————`;
 
         // 显示订单确认
-        if (confirm(`您的订单：\n${JSON.stringify(orderDetails, null, 2)}\n\n确认提交订单吗？`)) {
+        if (confirm(orderContent + '\n\n确认提交订单吗？')) {
             // 使用 Email.js 发送邮件
             const result = await emailjs.send(
-                "service_pmbbtxv",     // 您的 Service ID
-                "template_hej6ag2",    // 您的 Template ID
+                "service_pmbbtxv",
+                "template_hej6ag2",
                 {
                     to_email: "443875039@qq.com",
-                    customer_name: orderDetails.customerName,
-                    order_details: JSON.stringify(orderDetails, null, 2)
+                    customer_name: customerName,
+                    order_details: orderContent
                 }
             );
             
-            alert('订单已提交成功！');
+            alert('订单已提交成功！\n我们会尽快处理您的订单。');
             // 清空订单
             currentOrder = [];
             selectedBean = null;
@@ -120,7 +140,7 @@ async function submitOrder() {
         }
 
     } catch (error) {
-        alert('Error submitting order: ' + error.message);
+        alert('提交订单时发生错误：' + error.message);
         console.error('Error:', error);
     } finally {
         // 恢复按钮状态
