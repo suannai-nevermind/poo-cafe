@@ -6,6 +6,12 @@
     <title>Poo Cafe</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+       (function(){
+          emailjs.init("TX4PpApNqkqBSbTNg");  // 您的 Public Key
+       })();
+    </script>
 </head>
 <body>
     <div class="container">
@@ -61,7 +67,7 @@
                         <span class="tag">美式</span>
                         <span class="name">椰青美式(冷)</span>
                         <span class="price">¥5</span>
-                        <button onclick="addToOrder('椰青美式(冷)', 5)">+</button>
+                        <button onclick="addToOrder('椰青美(冷)', 5)">+</button>
                     </div>
                     <div class="menu-item">
                         <span class="tag">美式</span>

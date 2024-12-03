@@ -90,34 +90,28 @@ async function submitOrder() {
         submitButton.disabled = true;
         submitButton.innerHTML = '<i class="ri-loader-2-line"></i> Submitting...';
 
-        const note = prompt('Any special requests? (Optional)：') || 'None';
-
-        // 生成订单内容
-        let orderContent = `
-新订单通知！
-
-顾客姓名: ${customerName}
-备注信息: ${note}
-
-订单明细:
-`;
-
-        currentOrder.forEach(item => {
-            const itemTotal = item.price * item.quantity;
-            orderContent += `\n${item.name} x ${item.quantity} - ¥${itemTotal}`;
-        });
-
-        if (selectedBean) {
-            orderContent += `\n咖啡豆: ${selectedBean.name} +¥${selectedBean.price}`;
-        }
-
-        const total = document.getElementById('totalAmount').textContent;
-        orderContent += `\n\n总计: ¥${total}`;
+        const orderDetails = {
+            customerName: customerName,
+            items: currentOrder,
+            bean: selectedBean,
+            total: document.getElementById('totalAmount').textContent,
+            note: prompt('Any special requests? (Optional)：') || 'None'
+        };
 
         // 显示订单确认
-        if (confirm(`您的订单：\n${orderContent}\n\n确认提交订单吗？`)) {
-            alert('订单已提交！\n我们会尽快处理您的订单。');
+        if (confirm(`您的订单：\n${JSON.stringify(orderDetails, null, 2)}\n\n确认提交订单吗？`)) {
+            // 使用 Email.js 发送邮件
+            const result = await emailjs.send(
+                "service_pmbbtxv",     // 您的 Service ID
+                "template_hej6ag2",    // 您的 Template ID
+                {
+                    to_email: "443875039@qq.com",
+                    customer_name: orderDetails.customerName,
+                    order_details: JSON.stringify(orderDetails, null, 2)
+                }
+            );
             
+            alert('订单已提交成功！');
             // 清空订单
             currentOrder = [];
             selectedBean = null;
